@@ -20,17 +20,17 @@ def findSmallest(step, currentLine):
 addLine = findSmallest(0, 0)
 time = list()
 time.append(int(lines[addLine][0]))
-prodLine = "" + str(addLine)
+prodLine = "" + str(addLine + 1)
 i = 1
 for i in range(numSteps):
     smallest = findSmallest(i, addLine)
     if smallest != addLine:
-        time.append(int(lines[smallest][i]) + int(switchCosts[i - 1]))
-        prodLine += " " + str(smallest)
+        time.append(time[i - 1] + int(lines[smallest][i]) + int(switchCosts[i - 1]))
+        prodLine += " " + str(smallest + 1)
         addLine = smallest
     else:
-        time.append(int(lines[addLine][i]))
-        prodLine += " " + str(addLine)
+        time.append(time[i - 1] + int(lines[addLine][i]))
+        prodLine += " " + str(addLine + 1)
 
 print(time[numSteps - 1])
 print(prodLine)
