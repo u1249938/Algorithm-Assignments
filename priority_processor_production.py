@@ -1,17 +1,17 @@
-temp = int(input().split())
-numLines = temp[0]
-numSteps = temp[1]
+temp = input().split()
+numLines = int(temp[0])
+numSteps = int(temp[1])
 lines = list()
 for i in range(numLines):
-    lines.append(int(input().split()))
-switchCosts = int(input().split())
+    lines.append(input().split())
+switchCosts = input().split()
 
 def findSmallest(step, currentLine):
-    smallest = lines[currentLine][step]
+    smallest = int(lines[currentLine][step])
     smallestIndex = currentLine
     for i in range(numLines):
         if i != currentLine:
-            adjusted = lines[i][step] + switchCosts[step - 1]
+            adjusted = int(lines[i][step]) + int(switchCosts[step - 1])
             if adjusted < smallest:
                 smallest = adjusted
                 smallestIndex = i
@@ -19,17 +19,17 @@ def findSmallest(step, currentLine):
 
 addLine = findSmallest(0, 0)
 time = list()
-time.append(lines[addLine][0])
+time.append(int(lines[addLine][0]))
 prodLine = "" + addLine
 i = 1
 for i in range(numSteps):
-    temp = findSmallest(i, addLine)
-    if temp != addLine:
-        time.append(lines[temp][i] + switchCosts[i - 1])
-        prodLine += " " + temp
-        addLine = temp
+    smallest = findSmallest(i, addLine)
+    if smallest != addLine:
+        time.append(int(lines[smallest][i]) + int(switchCosts[i - 1]))
+        prodLine += " " + smallest
+        addLine = smallest
     else:
-        time.append(lines[addLine][i])
+        time.append(int(lines[addLine][i]))
         prodLine += " " + addLine
 
 print(time[numSteps - 1])
